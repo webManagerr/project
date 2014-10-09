@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+html,body{height:100%;}
+body {
+  padding-top: 25px;
+
+}
+.container{min-height:96%;}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+
+footer{
+	
+	text-align: right;
+	padding-right: 40px;
+	color : #B0B0B0 ;
+}
+
