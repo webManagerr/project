@@ -1,7 +1,6 @@
 package test;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,13 +47,7 @@ public class ProjectListImplementation extends DirImplementation<Project> implem
     private void upload(){
         
         File dir = new File(projectsPath);
-        File[] projectDirs = dir.listFiles(new FileFilter() {
-
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.isDirectory();
-            }
-        });
+        File[] projectDirs = dir.listFiles((File pathname) -> pathname.isDirectory());
         if (projectDirs != null) {
             for (File pd : projectDirs) {
                 File projectXml = new File(pd, "project.xml");
