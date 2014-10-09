@@ -4,6 +4,7 @@
     Author     : Denis
 --%>
 
+<%@page import="org.radixware.web.manager.Node"%>
 <%@page import="test.WorkspaceFactory"%>
 <%@page import="org.radixware.web.manager.Project"%>
 <%@page import="org.radixware.web.manager.Workspace"%>
@@ -39,7 +40,7 @@
         <%
            Workspace work = WorkspaceFactory.getInstance();
            int i = 1;
-           for(Project p : work.getProjectList().getProjects())
+           for(Node p : work.getProjectList().getNodeList().getNodes())
            {
                out.println("<tr>"
                        + "<td>" + i + "</td>"
