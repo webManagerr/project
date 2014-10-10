@@ -25,7 +25,7 @@ import org.tmatesoft.svn.core.io.SVNRepository;
 public class ProjectListImplementation extends DirImplementation<Project> implements ProjectList
 {
     private List<Project> projects = null;
-    private final String projectsPath = "C:/Users/1/Desktop/project";
+    private final String projectsPath = "C:/Users/Denis/Desktop/project";
 
     public ProjectListImplementation() {
         super("project List" , null);   
