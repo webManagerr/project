@@ -17,9 +17,10 @@ public class NodeListImplementation<T extends Node> implements NodeList<T>{
 	@Override
 	public List<T> getNodes() {
 		List<T> temp = new ArrayList<>();
-                this.nodes.stream().forEach((n) -> {
-                temp.add(n);
-            });
+                for(T element : nodes)
+                {
+                    temp.add(element);
+                }
 		return temp;
 	}
 }
