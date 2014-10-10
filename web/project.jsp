@@ -4,6 +4,7 @@
     Author     : Denis
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="web.Tools"%>
 <%@page import="test.WorkspaceFactory"%>
 <%@page import="org.radixware.web.manager.Project"%>
@@ -52,7 +53,12 @@
         <div class="wrapper active">
             <div class="menu">
                 <a href="#" id="Menu1">&#9776;</a>
-                <%=Tools.generateReference(project)%>
+                <%
+                    List<String> ref = Tools.generateReference(project);
+                    for (String s: ref){
+                        out.println(s);
+                    }                
+                %>
                 <div class="home"><a href="workspace.jsp"><img src="image/home.png"/></a></div>
             </div>
             <div class="text-div">

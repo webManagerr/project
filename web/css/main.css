@@ -23,11 +23,10 @@ body{
 
 .menu {
   width: 100%;
-  position: absolute;
   top: 0;
-  z-index: 1;
+  border-left: 1px solid #A9A9A9;
   background-color: #680000;
-  
+ 
     
 }
 .home{
@@ -42,7 +41,7 @@ body{
   text-decoration: none;
   text-shadow: 0 -1px 0 #000;
     display:inline;
-    margin-right: 10px;
+    
 }
 .list-nav{
    background: #680000 ;
@@ -59,14 +58,15 @@ body{
 
 .nav li {
   padding: 0 8px;
-  line-height: 20px;
-  border-bottom: 1px solid #A9A9A9;
+  line-height: 20px;  
+border-bottom: 1px solid #A9A9A9;
+
 }
 
 .nav li:first-child {
     font-size: 16px;
     padding: 20px;
-    border-right: 1px solid #A9A9A9;
+    padding-bottom: 22px;
 }
 
 .nav a {
@@ -92,20 +92,73 @@ body{
 }
 
 .text-div{
-    margin-top: 40px;
+    
 }
 
 .distrib-table{
     border: 1px solid rgb(230, 218, 218);
 }
 
-table.table tr>td {
-    text-align: center;
+
+
+
+.image{
+     text-align: center;
+    vertical-align: middle;
+    margin: 0 auto;
+    margin-top: -10px;
+}
+/*-----------------------------------*/
+.menu-list{
+    left:50px;
+    position: absolute;
+    margin: 11px 0 0 -6px;
+    padding: 5px 0;
+    min-width: 120px;
+    border: 1px solid #bdc4c9;
+    background: #fff;
+    display:block;
+    
 }
 
-table.table  tr>th {
-    text-align: center;
+.menu-list .menu-list-arrow-border,.menu-list-arrow{
+        left: 13px;
+        right: auto;
+}
+.menu-list-arrow-border{
+    border-color: transparent transparent #bdc4c9 transparent;
+    border-style: solid;
+    border-width: 9px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -19px;
+}
+.menu-list-arrow{
+
+    border-color: transparent transparent #fff transparent;
+    border-style: solid;
+    border-width: 9px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -17px;
 }
 
+.menu-list ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.menu-list a{
+    height: 20px;
+    line-height: 20px;
+    padding: 1px 20px 1px 13px;
+    display: block;
+    color:black;
 
-
+}
+/*-------------------*/
+.tabel-distrib caption{
+    text-align: left;
+}

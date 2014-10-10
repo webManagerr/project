@@ -50,7 +50,12 @@
 <div class="wrapper active">
   <div class="menu">
     <a href="#" id="Menu1">&#9776;</a>
-    <%=Tools.generateReference(dk)%>
+    <%
+                    List<String> ref = Tools.generateReference(dk);
+                    for (String s: ref){
+                        out.println(s);
+                    }                
+                %>
     <div class="home"><a href="workspace.jsp"><img src="image/home.png"/></a></div>
   </div>
      <div class="text-div">

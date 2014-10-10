@@ -7,6 +7,7 @@
 package web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.radixware.web.manager.Node;
 
@@ -27,28 +28,40 @@ public class Tools {
         pages.add("distrib.jsp");
     }
     
-    public static String generateReference(Node element){
+    public static List<String> generateReference(Node element){
         int countParent = 0;
         Node parent = element;
         while ((parent = parent.getParent())!=null){
             countParent++;
         }
-        String ref[] = new String[countParent-1];
+        List<String> result = new ArrayList<String>();
         parent = element;
         
         for (int i = countParent-1 , j= 0; i!=0; i-- ,j++){
             parent = parent.getParent();
-            if(parent.getName().equals("Distribution Kits")) ref[j]="";
-            else
-                ref[j] ="<a href="+ pages.get(i) +"?id="+parent.getId()+">"+parent.getName()+"</a>";
+            if(parent.getName().equals("Distribution Kits")){j--; continue;}
+            result.add("<a href="+ pages.get(i) +"?id="+parent.getId()+">"+parent.getName()+"</a>");
         }
+        Collections.reverse(result);
         
-        String result = "";
-        for(int i=ref.length-1; i >= 0 ; i--)
-        {
-            result += ref[i];
-        }
-        result += "<a>"+element.getName()+"</a>";
-        return result;
+//        String ref[] = new String[countParent-1];
+//        parent = element;
+//        
+//        for (int i = countParent-1 , j= 0; i!=0; i-- ,j++){
+//            parent = parent.getParent();
+//            if(parent.getName().equals("Distribution Kits")) ref[j]="";
+//            else
+//                ref[j] ="<a href="+ pages.get(i) +"?id="+parent.getId()+">"+parent.getName()+"</a>";
+//        }
+        
+//        String result = "";
+//        for(int i=ref.length-1; i >= 0 ; i--)
+//        {
+//            result += ref[i];
+//        }
+//        result += "<a>"+element.getName()+"</a>";
+        result.add("<a>"+element.getName()+"</a>");
+       return result;
+
     }
 }
