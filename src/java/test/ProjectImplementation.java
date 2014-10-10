@@ -6,6 +6,7 @@ import org.radixware.web.manager.Project;
 import org.radixware.manager.entry.ProjectEntry;
 
 
+
 public class ProjectImplementation extends NodeImplementation implements Project{
 
 	private ExternalProducts ep = null;
@@ -31,4 +32,8 @@ public class ProjectImplementation extends NodeImplementation implements Project
             return this.pe;
         } 
 
+    @Override
+    public String getSvnHomeUrl() {
+        return pe.getURL().getProtocol() + "://" + pe.getURL().getHost() + ":" + pe.getURL().getPort() + pe.getURL().getPath();
+    }
 }
