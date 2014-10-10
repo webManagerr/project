@@ -2,6 +2,8 @@ package test;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.xmlbeans.XmlException;
@@ -12,6 +14,7 @@ import org.radixware.web.manager.Scripts;
 import org.radixware.manager.entry.DistributiveEntry;
 import org.radixware.manager.entry.UpgradeXmlEntry;
 import org.radixware.schemas.product.StructuredChanges;
+import org.radixware.schemas.product.StructuredChanges.StructuredChange;
 import org.radixware.schemas.product.Upgrade;
 import org.radixware.schemas.product.UpgradeDocument;
 import org.tmatesoft.svn.core.SVNException;
@@ -20,7 +23,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     private DistributiveEntry de = null;
     private Timestamp time = null;
-    private String changeList = null;
+    private List<String> changeList = null;
     private ReleaseImplementation release = null;
     private ScriptsImplementation scripts = null;
 
@@ -65,13 +68,18 @@ public class DistributionKitImplementation extends NodeImplementation implements
     }
 
     @Override
-    public String getChangeList() {
+    public List<String> getChangeList() {
         synchronized(this){
-            if(changeList == null)
+            if(changeList == null){
+                changeList = new ArrayList<>();
                 for(StructuredChanges ch : getUpXml().getStructuredChangesList())
                 {
-                    changeList += ch.xmlText();
+                    for(StructuredChange element : ch.getStructuredChangeList())
+                    {
+                        changeList.add("[" + element.getIssueType() + "] ()" + element.getMessage());
+                    }
                 }
+            }
         }
         return changeList;
     }

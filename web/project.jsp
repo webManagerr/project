@@ -30,16 +30,16 @@
     </head>
 
     <body>
-        <% 
-                String idProject = request.getParameter("id");
-                Project project = (Project)WorkspaceFactory.getInstance().findNodeById(idProject);
-                String id = project.getExternalProducts().getId();
-                
+        <%
+            String idProject = request.getParameter("id");
+            Project project = (Project) WorkspaceFactory.getInstance().findNodeById(idProject);
+            String id = project.getExternalProducts().getId();
+
         %>
         <div class="list-nav">      
             <ul class="nav">
                 <li></li>
-               
+
                 <li><a href="#Config">Config</a></li>
                 <li><a href="list.jsp?id=<%=project.getExternalProducts().getId()%>">Distribution Kits</a></li>
                 <li><a href="#Scripts">Scripts</a></li>
@@ -53,16 +53,36 @@
         <div class="wrapper active">
             <div class="menu">
                 <a href="#" id="Menu1">&#9776;</a>
+
                 <%
                     List<String> ref = Tools.generateReference(project);
-                    for (String s: ref){
-                        out.println(s);
-                    }                
+                    if (!ref.isEmpty()) {
+                        if (ref.size() > 2) {
+                %>
+                <a href="#" id="list-folder"><img src="image/folder.png" class="image" ></a>
+                <div class="menu-list" style="display:none">
+                    <div class="menu-list-arrow-border"></div>
+                    <div class="menu-list-arrow"></div>
+                    <ul>
+                        <%
+                            for (int i = 0; i < ref.size() - 2; i++) {
+                                out.println("<li>" + ref.get(i) + "</li>");
+                            }
+                        %>  
+                    </ul>
+                </div>
+                <%                            out.println(ref.get(ref.size() - 2) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(ref.size() - 1));
+                        } else if (ref.size() == 2) {
+                            out.println(ref.get(0) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(1));
+                        } else {
+                            out.println(ref.get(0));
+                        }
+                    }
                 %>
                 <div class="home"><a href="workspace.jsp"><img src="image/home.png"/></a></div>
             </div>
             <div class="text-div">
-                This SvnHomeURl: <%=project.getSvnHomeUrl()%> <br>
+                <h3>SvnHomeURl: <%=project.getSvnHomeUrl()%></h3>
             </div>
         </div>
     </body>

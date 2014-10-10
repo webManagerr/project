@@ -36,13 +36,13 @@
     <body>
         <%
             String listId = request.getParameter("id");
-            ExternalProducts exs = ((ExternalProducts)WorkspaceFactory.getInstance().findNodeById(listId));
-            
+            ExternalProducts exs = ((ExternalProducts) WorkspaceFactory.getInstance().findNodeById(listId));
+
             String idProject = exs.getParent().getId();
             String nameProject = exs.getParent().getName();
-            
+
         %>
-         <div class="list-nav">      
+        <div class="list-nav">      
             <ul class="nav">
                 <li></li>
                 <li><a href="#Config">Config</a></li>
@@ -58,11 +58,29 @@
         <div class="wrapper active">
             <div class="menu">
                 <a href="#" id="Menu1">&#9776;</a>
-                <%
-                    List<String> ref = Tools.generateReference(exs);
-                    for (String s: ref){
-                        out.println(s);
-                    }                
+                <%                    List<String> ref = Tools.generateReference(exs);
+                    if (!ref.isEmpty()) {
+                        if (ref.size() > 2) {
+                %>
+                <a href="#" id="list-folder"><img src="image/folder.png" class="image" ></a>
+                <div class="menu-list" style="display:none">
+                    <div class="menu-list-arrow-border"></div>
+                    <div class="menu-list-arrow"></div>
+                    <ul>
+                        <%
+                            for (int i = 0; i < ref.size() - 2; i++) {
+                                out.println("<li>" + ref.get(i) + "</li>");
+                            }
+                        %>  
+                    </ul>
+                </div>
+                <%                            out.println(ref.get(ref.size() - 2) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(ref.size() - 1));
+                        } else if (ref.size() == 2) {
+                            out.println(ref.get(0) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(1));
+                        } else {
+                            out.println(ref.get(0));
+                        }
+                    }
                 %>
                 <div class="home"><a href="workspace.jsp"><img src="image/home.png"/></a></div>
             </div>
@@ -73,16 +91,16 @@
                         <th>Project</th>
                     </tr>
                     <%
-                        int i = 1;  
+                        int i = 1;
                         for (ExternalProduct element : exs) {
-                            
+
                             out.println("<tr>"
                                     + "<td>" + i + "</td>"
                                     + "<td><a href='distribs.jsp?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
                                     + "</tr>");
                             i++;
                         }
-                    
+
                     %>
                 </table>
 

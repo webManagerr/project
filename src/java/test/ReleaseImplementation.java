@@ -19,7 +19,16 @@ public class ReleaseImplementation extends NodeImplementation implements Release
 
 	@Override
 	public String getVersion() {
-		return dre.getName();
+            try {
+                return dre.getReleaseXml().getXml().getReleaseNumber();
+            } catch (SVNException ex) {
+                Logger.getLogger(ReleaseImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ReleaseImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XmlException ex) {
+                Logger.getLogger(ReleaseImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return "";
 	}
 
 	@Override
