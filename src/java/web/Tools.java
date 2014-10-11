@@ -35,32 +35,14 @@ public class Tools {
             countParent++;
         }
         List<String> result = new ArrayList<String>();
+        result.add("<a>"+element.getName()+"</a>");
         parent = element;
         
         for (int i = countParent-1 , j= 0; i!=0; i-- ,j++){
             parent = parent.getParent();
             if(parent.getName().equals("Distribution Kits")){j--; continue;}
-            result.add("<a href="+ pages.get(i) +"?id="+parent.getId()+">"+parent.getName()+"</a>");
+            result.add("<a href='"+ pages.get(i) +"?id="+parent.getId()+"'>"+parent.getName()+"</a>");
         }
-        Collections.reverse(result);
-        
-//        String ref[] = new String[countParent-1];
-//        parent = element;
-//        
-//        for (int i = countParent-1 , j= 0; i!=0; i-- ,j++){
-//            parent = parent.getParent();
-//            if(parent.getName().equals("Distribution Kits")) ref[j]="";
-//            else
-//                ref[j] ="<a href="+ pages.get(i) +"?id="+parent.getId()+">"+parent.getName()+"</a>";
-//        }
-        
-//        String result = "";
-//        for(int i=ref.length-1; i >= 0 ; i--)
-//        {
-//            result += ref[i];
-//        }
-//        result += "<a>"+element.getName()+"</a>";
-        result.add("<a>"+element.getName()+"</a>");
        return result;
 
     }

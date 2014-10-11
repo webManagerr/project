@@ -68,15 +68,16 @@
                     <div class="menu-list-arrow"></div>
                     <ul>
                         <%
-                            for (int i = 0; i < ref.size() - 2; i++) {
+                            for (int i = 2; i < ref.size(); i++) {
                                 out.println("<li>" + ref.get(i) + "</li>");
                             }
+
                         %>  
                     </ul>
                 </div>
-                <%                            out.println(ref.get(ref.size() - 2) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(ref.size() - 1));
+                <%                            out.println(ref.get(1) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(0));
                         } else if (ref.size() == 2) {
-                            out.println(ref.get(0) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(1));
+                            out.println(ref.get(1) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(0));
                         } else {
                             out.println(ref.get(0));
                         }
