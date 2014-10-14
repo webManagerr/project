@@ -88,18 +88,16 @@
             <div class="text-div">
                 <table class="table">
                     <tr>
-                        <th>№</th>
-                        <th>Project</th>
+                       
+                        <th>Product</th>
                     </tr>
                     <%
-                        int i = 1;
+                        
                         for (ExternalProduct element : exs) {
 
                             out.println("<tr>"
-                                    + "<td>" + i + "</td>"
                                     + "<td><a href='distribs.jsp?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
                                     + "</tr>");
-                            i++;
                         }
 
                     %>

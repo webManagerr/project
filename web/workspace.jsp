@@ -34,19 +34,15 @@
     <div class="text-div">
     <table class="table">
         <tr>
-            <th>№</th>
             <th>Project</th>
         </tr>
         <%
            Workspace work = WorkspaceFactory.getInstance();
-           int i = 1;
            for(Node p : work.getProjectList().getNodeList().getNodes())
            {
                out.println("<tr>"
-                       + "<td>" + i + "</td>"
                        + "<td><a href='project.jsp?id=" + p.getId() + "'>" + p.getName() + "</a></td>"
                        + "</tr>");
-               i++;
                 
            }
         %>

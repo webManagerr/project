@@ -92,9 +92,14 @@ border-bottom: 1px solid #A9A9A9;
 }
 
 .text-div{
-    
+    padding-left: 10px;
 }
-
+.discription h4{
+    text-align: center;
+}
+.discription p{
+    font-size: 15px;
+}
 .distrib-table{
     border: 1px solid rgb(230, 218, 218);
 }

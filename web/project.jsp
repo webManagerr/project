@@ -84,7 +84,7 @@
                 <div class="home"><a href="workspace.jsp"><img src="image/home.png"/></a></div>
             </div>
             <div class="text-div">
-                <h3>SvnHomeURl: <%=project.getSvnHomeUrl()%></h3>
+                <h4>SvnHomeURl: <%=project.getSvnHomeUrl()%></h4>
             </div>
         </div>
     </body>

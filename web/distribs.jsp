@@ -91,19 +91,17 @@
             <div class="text-div">
                 <table class="table">
                     <tr>
-                        <th>№</th>
-                        <th>Project</th>
+                        <th>Version</th>
                     </tr>
                     <%
-                        int i = 1;
+                        
 
                         for (DistributionKit element : dks) {
 
-                            out.println("<tr>"
-                                    + "<td>" + i + "</td>"
+                            out.println("<tr>"          
                                     + "<td><a href='distrib.jsp?id=" + element.getId() + "'>" + element.getVersion() + "</a></td>"
                                     + "</tr>");
-                            i++;
+                            
                         }
                     %>
                 </table>

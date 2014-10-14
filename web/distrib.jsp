@@ -82,50 +82,54 @@
             </div>
             <div class="text-div">
 
-                <div>
-                    <h4>Created <%=dk.getCreateTime().toString()%> previos number <%=dk.getPrevVersion()%></h4>
-                    <table class = "table tabel-distrib">
-                        <caption>Discription</caption>
-                        <tr><td><%=dk.getDescription()%></td></tr>
-                    </table>
-                    <table class = "table tabel-distrib">
-                        <caption>Changes list</caption>
+                <div class="discription">
+                    <h4>Created <%=dk.getCreateTime().toString()%> previous number <%=dk.getPrevVersion()%></h4>
+                    <%  String discription = dk.getDescription();
+                        if (discription != null) {
+                    %>
+                    <div class="discription">
+                        <h4>Description</h4>
+                        <p><%=discription%></p>
+                        <%}%>
+                    </div>
+                    <% if (!dk.getChangeList().isEmpty()) {%>
+                    <div class="discription">             
+                        <h4>Changes list</h4>
                         <%
                             for (String change : dk.getChangeList()) {
                         %>
-                        <tr><td><%=change%></td></tr>
+                        <p><%=change%></p>
                         <%
                             }
                         %> 
-                    </table>
 
-                </div><br/>
-                <div>
-                    <h4>Based on releases <%=release.getVersion()%> with status <%=release.getStatus()%></h4>
-                    <table class="table">
-                        <tr>
-                            <th>Name</th>
-                            <th>URI</th>
-                            <th>Layer Version</th>
-                        </tr>     
-                        <tr>
-                            <td><%=release.getVersion()%>></td>
-                            <td>none</td>
-                            <td>nonde</td>
-                        </tr>  
-                    </table>
-                </div><br/>
-                <div>
-                    <h4>Contains scripts for layers</h4>
-                    <table class="table">   
-                        <tr>
-                            <td>org.raxware</td>
-                        </tr>  
-                    </table>
+                    </div><br/><%}%>                    
+                    <div class="discription">
+                        <h4>Based on releases <%=release.getVersion()%> with status <%=release.getStatus()%></h4>
+                        <table class="table">
+                            <tr>
+                                <th>Name</th>
+                                <th>URI</th>
+                                <th>Layer Version</th>
+                            </tr>     
+                            <tr>
+                                <td><%=release.getVersion()%>></td>
+                                <td>none</td>
+                                <td>none</td>
+                            </tr>  
+                        </table>
+                    </div><br/>
+                    <div class="discription">
+                        <h4>Contains scripts for layers</h4>
+                        <table class="table">   
+                            <tr>
+                                <td>org.raxware</td>
+                            </tr>  
+                        </table>
+                    </div>
+
                 </div>
-
             </div>
-        </div>
 
     </body>
 </html>
