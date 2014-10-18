@@ -15,10 +15,11 @@ import org.tmatesoft.svn.core.SVNException;
 
 public class ScriptsImplementation extends NodeImplementation implements Scripts
 {
-	DistributiveScriptsEntry dse;
+	DistributiveScriptsEntry distributiveScriptsEntry;
         List<Layer> layers = null;
 	public ScriptsImplementation(DistributiveScriptsEntry dse , Node parent) {
             super(dse.getDisplayName(),parent);
+            this.distributiveScriptsEntry = dse;
             
 	}
 	
@@ -29,16 +30,26 @@ public class ScriptsImplementation extends NodeImplementation implements Scripts
                     if
                         (layers == null){
                         layers = new ArrayList<>();
-                        for(ScriptsLayerEntry element : dse.getLayers())
+                        for(ScriptsLayerEntry element : distributiveScriptsEntry.getLayers())
                         {
                             layers.add(new LayerImplementation(element));
                         }
                     }
                 }
-                return new LayersImplementation(layers);
+                return new ScriptLayersImplementation(layers);
                 
             } catch (    XmlException | IOException | SVNException ex) {
                 throw new ProjectInfoAccessException(ex);
             }
 	}	
+
+    @Override
+    protected String idUrl() {
+        return distributiveScriptsEntry.getURL().getPath();
+    }
+
+    @Override
+    protected String idUrlParent() {
+        return distributiveScriptsEntry.getParent().getURL().getPath();
+    }
 }

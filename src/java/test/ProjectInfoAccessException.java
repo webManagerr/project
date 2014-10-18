@@ -15,5 +15,10 @@ public class ProjectInfoAccessException extends RuntimeException{
     public ProjectInfoAccessException(Throwable cause) {
         super(cause);
     }
+
+    public ProjectInfoAccessException(String string) {
+        super(string);
+    }
+    
     
 }

@@ -5,35 +5,42 @@ import org.radixware.web.manager.Node;
 import org.radixware.web.manager.Project;
 import org.radixware.manager.entry.ProjectEntry;
 
+public class ProjectImplementation extends NodeImplementation implements Project {
 
+    private ExternalProducts externalProducts = null;
+    private ProjectEntry projectEntry = null;
 
-public class ProjectImplementation extends NodeImplementation implements Project{
+    public ProjectImplementation(ProjectEntry pe, Node parent) {
+        super(pe.getDisplayName(), parent);
+        this.projectEntry = pe;
+    }
 
-	private ExternalProducts ep = null;
-        private ProjectEntry pe = null;
-	
-	public ProjectImplementation(ProjectEntry pe , Node parent) {
-            super(pe.getDisplayName(),parent);
-            this.pe = pe;
-	}
-
-	@Override
-	public ExternalProducts getExternalProducts() {
-            synchronized(this){
-                if(this.ep == null)
-                {
-                    this.ep = new ExternalProductsImplementation(this);
-                }
+    @Override
+    public ExternalProducts getExternalProducts() {
+        synchronized (this) {
+            if (this.externalProducts == null) {
+                this.externalProducts = new ExternalProductsImplementation(this);
             }
-                return this.ep;
-	}
-        
-        public ProjectEntry getProjectEntry() {
-            return this.pe;
-        } 
+        }
+        return this.externalProducts;
+    }
+
+    public ProjectEntry getProjectEntry() {
+        return this.projectEntry;
+    }
 
     @Override
     public String getSvnHomeUrl() {
-        return pe.getURL().getProtocol() + "://" + pe.getURL().getHost() + ":" + pe.getURL().getPort() + pe.getURL().getPath();
+        return projectEntry.getURL().getProtocol() + "://" + projectEntry.getURL().getHost() + ":" + projectEntry.getURL().getPort() + projectEntry.getURL().getPath();
+    }
+
+    @Override
+    protected String idUrl() {
+        return projectEntry.getURL().getPath();
+    }
+
+    @Override
+    protected String idUrlParent() {
+        return "";
     }
 }

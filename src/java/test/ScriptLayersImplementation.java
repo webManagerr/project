@@ -5,13 +5,13 @@ import java.util.List;
 import org.radixware.web.manager.Layer;
 import org.radixware.web.manager.Layers;
 
-public class LayersImplementation implements Layers
+public class ScriptLayersImplementation implements Layers
 {
 	List<Layer> layers;
 	
 	
 	
-	public LayersImplementation(List<Layer> layers) {
+	public ScriptLayersImplementation(List<Layer> layers) {
 		this.layers = layers;
 	}
 

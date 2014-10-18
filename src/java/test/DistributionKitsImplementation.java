@@ -1,6 +1,5 @@
 package test;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,44 +12,56 @@ import org.radixware.manager.entry.ProductDistributivesEntry;
 import org.radixware.web.manager.NodeList;
 import org.tmatesoft.svn.core.SVNException;
 
+public class DistributionKitsImplementation extends DirImplementation implements DistributionKits {
 
-public class DistributionKitsImplementation extends DirImplementation implements DistributionKits
-{
-	private  List<DistributionKit> listDK = null;
-        
-	
-	public DistributionKitsImplementation(ExternalProductImplementation parent) {
-		
-            super("Distribution Kits", parent);
-            
-	}
+    private List<DistributionKit> distributionKit = null;
+    private ProductDistributivesEntry productDistributivesEntry = null;
 
-        @Override
-        public NodeList getNodeList() {
-            synchronized(this){
-                if(listDK == null)
-                {
-                    try {
-                    ProductDistributivesEntry pde = ((ExternalProductImplementation)super.getParent())
+    public DistributionKitsImplementation(ExternalProductImplementation parent) {
+
+        super("Distribution Kits", parent);
+
+    }
+
+    @Override
+    public NodeList getNodeList() {
+        synchronized (this) {
+            if (distributionKit == null) {
+                try {
+                    productDistributivesEntry = ((ExternalProductImplementation) super.getParent())
                             .getProductDistributivesEntry();
-                    listDK = new ArrayList<>();
-                    for(DistributiveEntry element : pde.getDistributives())
-                    {
-                        listDK.add(new DistributionKitImplementation(element, this));
+                    distributionKit = new ArrayList<>();
+                    
+                    for (DistributiveEntry element : productDistributivesEntry.getDistributives()) {
+                        distributionKit.add(new DistributionKitImplementation(element, this));
                     }
-                    super.setNodeList(new NodeListImplementation(listDK));
-                    } catch (SVNException ex) {
-                        Logger.getLogger(DistributionKitsImplementation.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    super.setNodeList(new NodeListImplementation(distributionKit));
+                } catch (SVNException ex) {
+                    Logger.getLogger(DistributionKitsImplementation.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            return super.getNodeList();
         }
-        
-        
+        return super.getNodeList();
+    }
 
-	@Override
-	public Iterator<DistributionKit> iterator() {
-		return getNodeList().getNodes().iterator();
-	}
+    @Override
+    public Iterator<DistributionKit> iterator() {
+        return getNodeList().getNodes().iterator();
+    }
+
+    @Override
+    protected String idUrl() {
+        if (distributionKit == null) {
+            getNodeList();
+        }
+        return productDistributivesEntry.getURL().getPath();
+    }
+
+    @Override
+    protected String idUrlParent() {
+        if (distributionKit == null){
+            getNodeList();
+        }
+        return productDistributivesEntry.getParent().getURL().getPath();
+    }
 }

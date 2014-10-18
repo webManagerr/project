@@ -19,41 +19,39 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.io.SVNRepository;
 
+public class ProjectListImplementation extends DirImplementation<Project> implements ProjectList {
 
-public class ProjectListImplementation extends DirImplementation<Project> implements ProjectList
-{
     private List<Project> projects = null;
-    private final String projectsPath = "C:/Users/Denis/Desktop/project";
+    private final String projectsPath = "C:\\Users\\Денис\\Desktop\\Компоненты\\radxWareManger\\Projects";
 
     public ProjectListImplementation() {
-        super("project List" , null);   
+        super("project List", null);
     }
 
     @Override
     public NodeList getNodeList() {
-        synchronized(this){
-            if(projects == null)
-            {
+        synchronized (this) {
+            if (projects == null) {
                 projects = new ArrayList<>();
                 upload();
                 NodeListImplementation<Project> nlProj = new NodeListImplementation<>(projects);
-                super.setNodeList(nlProj); 
+                super.setNodeList(nlProj);
             }
         }
-        return super.getNodeList(); //To change body of generated methods, choose Tools | Templates.
+        return super.getNodeList();
     }
 
-    private void upload(){
-        
+    private void upload() {
+
         File dir = new File(projectsPath);
         File[] projectDirs = dir.listFiles(new FileFilter() {
 
             @Override
             public boolean accept(File pathname) {
-                return  pathname.isDirectory();
+                return pathname.isDirectory();
             }
         });
-        
+
         if (projectDirs != null) {
             for (File pd : projectDirs) {
                 File projectXml = new File(pd, "project.xml");
@@ -72,20 +70,31 @@ public class ProjectListImplementation extends DirImplementation<Project> implem
                     }
                     ProjectEntry project = new ProjectEntry(svn, svnRevision, dirEntry, pd.getAbsolutePath(), projectXmlDoc);
                     //project.getReleases().getReleasesList();
-                    projects.add(new ProjectImplementation(project , this));
-                    
+                    projects.add(new ProjectImplementation(project, this));
+
                 } catch (IOException | SVNException | XmlException | AuthenticationCancelledException e) {
                     throw new ProjectInfoAccessException(e);
-                } finally{
+                } finally {
                     try {
-                        if(inputStream != null)
+                        if (inputStream != null) {
                             inputStream.close();
+                        }
                     } catch (IOException ex) {
                         throw new ProjectInfoAccessException(ex);
                     }
                 }
-                
+
             }
         }
+    }
+
+    @Override
+    protected String idUrl() {
+        throw new ProjectInfoAccessException("getUrl not supported " + this.getClass().getName());
+    }
+
+    @Override
+    protected String idUrlParent() {
+        throw new ProjectInfoAccessException("getUrlParent not supported " + this.getClass().getName());
     }
 }

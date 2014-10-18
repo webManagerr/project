@@ -1,60 +1,80 @@
 package test;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.xmlbeans.XmlException;
 import org.radixware.web.manager.Release;
 import org.radixware.manager.entry.DistributiveReleaseEntry;
+import org.radixware.web.manager.Layers;
 import org.tmatesoft.svn.core.SVNException;
 
 public class ReleaseImplementation extends NodeImplementation implements Release
 {
 
-        private DistributiveReleaseEntry dre;
+        private DistributiveReleaseEntry distributiveReleaseEntry;
+        private String version = null;
+        private String prevReleaseVersion = "";
+        private String status;
     
 	public ReleaseImplementation(DistributiveReleaseEntry dre , NodeImplementation parent) {
 		super(dre.getDisplayName(),parent);
-                this.dre = dre;
+                this.distributiveReleaseEntry = dre;
+                
 	}
 
+        private void initMembers()
+        {
+           try {
+                version = distributiveReleaseEntry.getReleaseXml().getXml().getReleaseNumber();
+                for(Integer i : distributiveReleaseEntry.getPrevReleaseNumber())
+                {
+                    prevReleaseVersion += String.valueOf(i)+"\n";
+                }
+                
+                status = distributiveReleaseEntry.findReleaseStatus().getName();
+            } catch (SVNException | IOException | XmlException ex) {
+                throw new ProjectInfoAccessException(ex);
+            }
+        }
+        
+        
 	@Override
 	public String getVersion() {
-            try {
-                return dre.getReleaseXml().getXml().getReleaseNumber();
-            } catch (SVNException ex) {
-                Logger.getLogger(ReleaseImplementation.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(ReleaseImplementation.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (XmlException ex) {
-                Logger.getLogger(ReleaseImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            if(version == null)
+            {
+                initMembers();
             }
-            return "";
+            return version;
 	}
 
 	@Override
 	public String getPrevReleaseVersion() {
-            String vers = "";
-            try {
-                
-                for(Integer i : dre.getPrevReleaseNumber())
-                {
-                    vers += String.valueOf(i)+"\n";
-                }
-                
-            } catch (    IOException | XmlException | SVNException ex) {
-                throw new ProjectInfoAccessException(ex);
+            if(version == null)
+            {
+                initMembers();
             }
-            
-            return vers;
+            return prevReleaseVersion;
 	}
 
 	@Override
 	public String getStatus() {
-            try {
-                return dre.findReleaseStatus().getName();
-            } catch (    IOException | XmlException | SVNException ex) {
-                throw new ProjectInfoAccessException(ex);
+            if(version == null)
+            {
+                initMembers();
             }
+           return status;
 	}
-	
+
+    @Override
+    public Layers getLayers() {
+        return new BranchLayersImplementation(distributiveReleaseEntry);
+    }
+
+    @Override
+    protected String idUrl() {
+        return distributiveReleaseEntry.getURL().getPath();
+    }
+
+    @Override
+    protected String idUrlParent() {
+        return distributiveReleaseEntry.getParent().getURL().getPath();
+    }	
 }
