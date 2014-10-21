@@ -4,6 +4,7 @@
     Author     : Denis
 --%>
 
+<%@page import="web.ListAdapter"%>
 <%@page import="org.radixware.web.manager.Release"%>
 <%@page import="web.Tools"%>
 <%@page import="org.radixware.web.manager.DistributionKit"%>
@@ -31,60 +32,19 @@
     </head>
     <body>
         <%
-            String listId = request.getParameter("id");
-            DistributionKit dk = (DistributionKit) WorkspaceFactory.getInstance().findNodeById(listId);
-            Release release = dk.getRelease();
-
+            String id = request.getParameter("id");
+            DistributionKit node = (DistributionKit) WorkspaceFactory.getInstance().findNodeById(id);
+            Release release = node.getRelease();
+            ListAdapter listAdapter = new ListAdapter(WorkspaceFactory.getInstance().findNodeById(id));
 
         %>
-        <div class="list-nav">      
-            <ul class="nav">
-                <li></li>
-                <li><a href="#Config">Config</a></li>
-                <li class="active-li"><a href="#">Distribution Kits</a></li>
-                <li><a href="#Scripts">Scripts</a></li>
-                <li><a href="#Development">Development</a></li>
-                <li><a href="#Releses">Releses</a></li>
-                <li><a href="#Customes">Customes</a></li>
-                <li><a href="#Test">Test</a></li>
-                <li><a href="#Prod">Prod</a></li>
-            </ul>
-        </div>
-        <div class="wrapper active">
-            <div class="menu">
-                <a href="#" id="Menu1">&#9776;</a>
-                <%     List<String> ref = Tools.generateReference(dk);
-                    if (!ref.isEmpty()) {
-                        if (ref.size() > 2) {
-                %>
-                <a href="#" id="list-folder"><img src="image/folder.png" class="image" ></a>
-                <div class="menu-list" style="display:none">
-                    <div class="menu-list-arrow-border"></div>
-                    <div class="menu-list-arrow"></div>
-                    <ul>
-                        <%
-                            for (int i = 2; i < ref.size(); i++) {
-                                out.println("<li>" + ref.get(i) + "</li>");
-                            }
-
-                        %>  
-                    </ul>
-                </div>
-                <%                            out.println(ref.get(1) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(0));
-                        } else if (ref.size() == 2) {
-                            out.println(ref.get(1) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(0));
-                        } else {
-                            out.println(ref.get(0));
-                        }
-                    }
-                %>
-                <div class="home"><a href="workspace.jsp"><img src="image/home.png"/></a></div>
-            </div>
+        <%@include file="menu.jsp" %>
+       
             <div class="text-div">
 
                 <div class="discription">
-                    <h4>Created <%=dk.getCreateTime().toString()%> previous number <%=dk.getPrevVersion()%></h4>
-                    <%  String discription = dk.getDescription();
+                    <h4>Created <%=node.getCreateTime().toString()%> previous number <%=node.getPrevVersion()%></h4>
+                    <%  String discription = node.getDescription();
                         if (discription != null) {
                     %>
                     <div class="discription">
@@ -92,11 +52,11 @@
                         <p><%=discription%></p>
                         <%}%>
                     </div>
-                    <% if (!dk.getChangeList().isEmpty()) {%>
+                    <% if (!node.getChangeList().isEmpty()) {%>
                     <div class="discription">             
                         <h4>Changes list</h4>
                         <%
-                            for (String change : dk.getChangeList()) {
+                            for (String change : node.getChangeList()) {
                         %>
                         <p><%=change%></p>
                         <%

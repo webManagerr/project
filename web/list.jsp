@@ -4,6 +4,7 @@
     Author     : Denis
 --%>
 
+<%@page import="web.ListAdapter"%>
 <%@page import="java.util.List"%>
 <%@page import="web.Tools"%>
 <%@page import="test.WorkspaceFactory"%>
@@ -35,56 +36,13 @@
     </head>
     <body>
         <%
-            String listId = request.getParameter("id");
-            ExternalProducts exs = ((ExternalProducts) WorkspaceFactory.getInstance().findNodeById(listId));
-
-            String idProject = exs.getParent().getId();
-            String nameProject = exs.getParent().getName();
-
+            String id = request.getParameter("id");
+            ExternalProducts node = ((ExternalProducts) WorkspaceFactory.getInstance().findNodeById(id));
+            ListAdapter listAdapter = new ListAdapter(WorkspaceFactory.getInstance().findNodeById(id));
+           
+            
         %>
-        <div class="list-nav">      
-            <ul class="nav">
-                <li></li>
-                <li><a href="#Config">Config</a></li>
-                <li class="active-li"><a>Distribution Kits</a></li>
-                <li><a href="#Scripts">Scripts</a></li>
-                <li><a href="#Development">Development</a></li>
-                <li><a href="#Releses">Releses</a></li>
-                <li><a href="#Customes">Customes</a></li>
-                <li><a href="#Test">Test</a></li>
-                <li><a href="#Prod">Prod</a></li>
-            </ul>
-        </div>
-        <div class="wrapper active">
-            <div class="menu">
-                <a href="#" id="Menu1">&#9776;</a>
-                <%                    List<String> ref = Tools.generateReference(exs);
-                    if (!ref.isEmpty()) {
-                        if (ref.size() > 2) {
-                %>
-                <a href="#" id="list-folder"><img src="image/folder.png" class="image" ></a>
-                <div class="menu-list" style="display:none">
-                    <div class="menu-list-arrow-border"></div>
-                    <div class="menu-list-arrow"></div>
-                    <ul>
-                        <%
-                            for (int i = 2; i < ref.size(); i++) {
-                                out.println("<li>" + ref.get(i) + "</li>");
-                            }
-
-                        %>  
-                    </ul>
-                </div>
-                <%                            out.println(ref.get(1) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(0));
-                        } else if (ref.size() == 2) {
-                            out.println(ref.get(1) + "<img src='image/arrow-right-grey.png' class = 'image'>" + ref.get(0));
-                        } else {
-                            out.println(ref.get(0));
-                        }
-                    }
-                %>
-                <div class="home"><a href="workspace.jsp"><img src="image/home.png"/></a></div>
-            </div>
+        <%@include file="menu.jsp" %>
             <div class="text-div">
                 <table class="table">
                     <tr>
@@ -93,7 +51,7 @@
                     </tr>
                     <%
                         
-                        for (ExternalProduct element : exs) {
+                        for (ExternalProduct element : node) {
 
                             out.println("<tr>"
                                     + "<td><a href='distribs.jsp?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
