@@ -4,6 +4,7 @@
     Author     : Denis
 --%>
 
+
 <%@page import="web.ListAdapter"%>
 <%@page import="java.util.List"%>
 <%@page import="web.Tools"%>
@@ -37,24 +38,28 @@
     <body>
         <%
             String id = request.getParameter("id");
-            ExternalProducts node = ((ExternalProducts) WorkspaceFactory.getInstance().findNodeById(id));
-            ListAdapter listAdapter = new ListAdapter(WorkspaceFactory.getInstance().findNodeById(id));
-           
-            
+            Node node = WorkspaceFactory.getInstance().findNodeById(id);
+            ListAdapter listAdapter = new ListAdapter(node);
+            List<String> coloms = listAdapter.getColomsName();
+            String row = listAdapter.getRowReference();
         %>
         <%@include file="menu.jsp" %>
             <div class="text-div">
+                <%=listAdapter.out%>
                 <table class="table">
                     <tr>
                        
-                        <th>Product</th>
+                        <th><%=coloms.get(0)%></th>
                     </tr>
                     <%
-                        
-                        for (ExternalProduct element : node) {
-
+                        if (ExternalProduct.class.equals(nodeInterface)){
+                            node = ((ExternalProduct)node).getDistributionKits();
+                        }
+                            
+                       List<Node> nodeList = ((Dir)node).getNodeList().getNodes();
+                        for (Node element : nodeList) {
                             out.println("<tr>"
-                                    + "<td><a href='distribs.jsp?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
+                                    + "<td><a href='"+row+"?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
                                     + "</tr>");
                         }
 

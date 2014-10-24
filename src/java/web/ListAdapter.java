@@ -23,33 +23,33 @@ import org.radixware.web.manager.Project;
 public class ListAdapter {
    private Node node;
    private Map<Class ,List<String>> colom = null;
+   private Map<Class ,String> rowReference = null;
    List<String> columnList = null;
    public String out="";//**
    
    private void init(){
        Class nodeClass = node.getClass();
-       columnList = new ArrayList<>();
        Class[] interfaces = nodeClass.getInterfaces();
        Class nodeInterface = interfaces[interfaces.length-1];
+       columnList = new ArrayList<>();
        colom  = new HashMap<Class,List<String>>();
-       
+       rowReference  = new HashMap<Class,String>();
         
         if(ExternalProducts.class.equals(nodeInterface)){
              columnList.add("Product");
              colom.put(node.getClass(), columnList);
+             rowReference.put(node.getClass(),"list.jsp");
         }
-       
+        
         if(ExternalProduct.class.equals(nodeInterface)){
+             columnList.add("Version");
              
+             colom.put(node.getClass(), columnList);
+             
+             rowReference.put(node.getClass(), "distrib.jsp");
         }
         
-        if(DistributionKits.class.equals(nodeInterface)){
-             
-        }
         
-        if(DistributionKit.class.equals(nodeInterface)){
-             
-        }
         
         
         
@@ -57,12 +57,14 @@ public class ListAdapter {
    public ListAdapter(Node node) {
         this.node = node; 
     }
-    
-    
-    
-    
+   
     public List<String> getColomsName(){
-        
-        return null;
+        if (colom == null) init();
+        return  colom.get(node.getClass());
+    }
+    
+    public String getRowReference(){
+        if (rowReference == null) init();
+        return  rowReference.get(node.getClass());
     }
 }

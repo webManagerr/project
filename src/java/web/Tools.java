@@ -35,7 +35,8 @@ public class Tools {
             countParent++;
         }
         List<String> result = new ArrayList<String>();
-        result.add("<a>"+element.getName()+"</a>");
+        if(!element.getName().equals("Distribution Kits"))
+            result.add("<a>"+element.getName()+"</a>");
         parent = element;
         
         for (int i = countParent-1 , j= 0; i!=0; i-- ,j++){

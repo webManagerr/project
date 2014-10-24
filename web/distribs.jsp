@@ -57,7 +57,7 @@
                         for (DistributionKit element : node) {
 
                             out.println("<tr>"          
-                                    + "<td><a href='distrib.jsp?id=" + element.getId() + "'>" + element.getVersion() + "</a></td>"
+                                    + "<td><a href='distrib.jsp?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
                                     + "</tr>");
                             
                         }

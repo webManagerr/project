@@ -34,8 +34,6 @@
         <%
             
             String id = request.getParameter("id");
-            
-            ListAdapter listAdapter = new ListAdapter(WorkspaceFactory.getInstance().findNodeById(id));
             Project node = (Project) WorkspaceFactory.getInstance().findNodeById(id);
         %>
         <%@include file="menu.jsp" %>
