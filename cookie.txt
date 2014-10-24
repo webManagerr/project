@@ -1,6 +1,4 @@
-   
-$(document).ready(function () {
-    var cook = $.cookie('activate-menu');
+var cook = $.cookie('activate-menu');
      if (cook==="false"&&cook!==null){ 
             $(".wrapper").toggleClass('active');
             alert(cook); 
@@ -20,14 +18,3 @@ $(document).ready(function () {
             
         }
     });
-
-
-    $("#list-folder").click(function () {
-        if ($(".menu-list").css("display") === "none") {
-            $(".menu-list").css("display", "");
-        } else {
-            $(".menu-list").css("display", "none");
-        }
-    });
-});
-

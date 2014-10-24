@@ -1,13 +1,13 @@
 
 
 
+<%@page import="web.ListAdapter"%>
 <%@page import="org.radixware.web.manager.Project"%>
 <%@page import="web.Tools"%>
 <%@page import="java.util.List"%>
 <%
     String externalProductId = "";
-    Class[] interfaces = node.getClass().getInterfaces();
-    Class nodeInterface = interfaces[interfaces.length - 1];
+    Class nodeInterface = ListAdapter.getNodeClass(node);
     if (Project.class.equals(nodeInterface)) {
         externalProductId = ((Project) node).getExternalProducts().getId();
     } else {

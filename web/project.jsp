@@ -25,6 +25,7 @@
         <link href="css/starter-template.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/jquery.cookie.js"></script>
         <script src="js/sylvester.src.js"></script>
         <script src="js/jqary.js"></script>
 

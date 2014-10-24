@@ -27,10 +27,21 @@ public class ListAdapter {
    List<String> columnList = null;
    public String out="";//**
    
+    public static Class getNodeClass(Node node){
+         Class nodeClass = node.getClass();
+         Class[] interfaces = nodeClass.getInterfaces();
+         Class nodeInterface = interfaces[interfaces.length-1];
+         
+         if(Project.class.equals(nodeInterface)) return Project.class;
+         if(ExternalProducts.class.equals(nodeInterface)) return ExternalProducts.class;
+         if(ExternalProduct.class.equals(nodeInterface)) return ExternalProduct.class;
+         if(DistributionKits.class.equals(nodeInterface)) return DistributionKits.class;
+         if(DistributionKit.class.equals(nodeInterface)) return DistributionKit.class;
+         
+         return null;
+    }
    private void init(){
-       Class nodeClass = node.getClass();
-       Class[] interfaces = nodeClass.getInterfaces();
-       Class nodeInterface = interfaces[interfaces.length-1];
+       Class nodeInterface =  getNodeClass(node);
        columnList = new ArrayList<>();
        colom  = new HashMap<Class,List<String>>();
        rowReference  = new HashMap<Class,String>();

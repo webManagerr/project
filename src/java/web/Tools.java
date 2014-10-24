@@ -7,9 +7,14 @@
 package web;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.radixware.web.manager.DistributionKit;
+import org.radixware.web.manager.ExternalProduct;
+import org.radixware.web.manager.ExternalProducts;
 import org.radixware.web.manager.Node;
+import org.radixware.web.manager.Project;
 
 /**
  *
@@ -17,18 +22,20 @@ import org.radixware.web.manager.Node;
  */
 public class Tools {
     
-    private static List<String> pages;
+    private static Map<Class,String> pages;
     
-    static{
-        pages = new ArrayList<String>();
-        pages.add("workspace.jsp");
-        pages.add("project.jsp");
-        pages.add("list.jsp");
-        pages.add("distribs.jsp");
-        pages.add("distrib.jsp");
+    private static void init(){
+        pages = new HashMap<Class,String>();
+        pages.put(Project.class,"project.jsp");
+        pages.put(ExternalProducts.class,"list.jsp");
+        pages.put(ExternalProduct.class,"list.jsp");
+        pages.put(DistributionKit.class,"distrib.jsp");
     }
     
+   
+    
     public static List<String> generateReference(Node element){
+        init();
         int countParent = 0;
         Node parent = element;
         while ((parent = parent.getParent())!=null){
@@ -42,7 +49,7 @@ public class Tools {
         for (int i = countParent-1 , j= 0; i!=0; i-- ,j++){
             parent = parent.getParent();
             if(parent.getName().equals("Distribution Kits")){j--; continue;}
-            result.add("<a href='"+ pages.get(i) +"?id="+parent.getId()+"'>"+parent.getName()+"</a>");
+            result.add("<a href='"+ pages.get(ListAdapter.getNodeClass(parent)) +"?id="+parent.getId()+"'>"+parent.getName()+"</a>");
         }
        return result;
 
