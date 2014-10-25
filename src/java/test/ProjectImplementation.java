@@ -43,4 +43,9 @@ public class ProjectImplementation extends NodeImplementation implements Project
     protected String idUrlParent() {
         return "";
     }
+
+    @Override
+    public Project getProjectParent() {
+        return this;
+    }
 }
