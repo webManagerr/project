@@ -1,18 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package test;
 
-import org.radixware.web.manager.Layer;
+import org.radixware.manager.entry.LayerEntry;
 import org.radixware.manager.entry.ScriptsLayerEntry;
+import org.radixware.web.manager.Layer;
 
-public class LayerImplementation implements Layer
-{
-	ScriptsLayerEntry sle;
-	
-	public LayerImplementation(ScriptsLayerEntry sle) {
-		this.sle = sle;
-	}
+/**
+ *
+ * @author Денис
+ */
+public class LayerImplementation  implements Layer{
+    
+    LayerEntry layerEntry;
 
-	@Override
-	public String getURL() {
-		return this.sle.getUri();
-	}
+    public LayerImplementation(LayerEntry layerEntry) {
+        this.layerEntry = layerEntry;
+    }
+
+    @Override
+    public String getURL() {
+        return this.layerEntry.getUri();
+    }
 }

@@ -6,7 +6,9 @@
 package test;
 
 import java.util.Iterator;
+import java.util.List;
 import org.radixware.manager.entry.BaseEntry;
+import org.radixware.manager.entry.LayerEntry;
 import org.radixware.web.manager.Layer;
 import org.radixware.web.manager.Layers;
 
@@ -14,17 +16,16 @@ import org.radixware.web.manager.Layers;
  *
  * @author Денис
  */
-public class BranchLayersImplementation implements Layers {
+public class BranchLayersImplementation implements Layers{
+    private List<Layer> layers;
 
-    private BaseEntry branchEntry;
-
-    public BranchLayersImplementation(BaseEntry branchEntry) {
-        this.branchEntry = branchEntry;
+    public BranchLayersImplementation(List<Layer> branchEntry) {
+        this.layers = branchEntry;
     }
 
     @Override
     public Iterator<Layer> iterator() {
-        return null; //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return layers.iterator(); 
     }
-
+    
 }

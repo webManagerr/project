@@ -30,7 +30,7 @@ public class ScriptsImplementation extends NodeImplementation implements Scripts
                 if (layers == null) {
                     layers = new ArrayList<>();
                     for (ScriptsLayerEntry element : distributiveScriptsEntry.getLayers()) {
-                        layers.add(new LayerImplementation(element));
+                        layers.add(new ScriptLayerImplementation(element));
                     }
                 }
             }
