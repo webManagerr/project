@@ -38,7 +38,7 @@ public class LayerImplementation  implements Layer{
 
     @Override
     public String getName() {
-        return this.layerEntry.getName();
+        return this.layerEntry.getDisplayName();
     }
 
     @Override
