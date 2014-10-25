@@ -32,12 +32,12 @@ public abstract class NodeImplementation implements Node {
 
     @Override
     public String getId() {
-        Project project = getProjectParent();
+        ProjectImplementation project = (ProjectImplementation)getProjectParent();
         if(project == null)
         {
             return "~" + idUrl();
         }
-        return project.getId() + "~" + idUrl();
+        return project.idUrl() + "~" + idUrl();
     }
 
     @Override
