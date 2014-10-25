@@ -46,24 +46,25 @@
         %>
         <%@include file="menu.jsp" %>
             <div class="text-div">
-                <%=listAdapter.out%>
                 <table class="table">
                     <tr>
                        
                         <th><%=coloms.get(0)%></th>
                     </tr>
                     <%  
-                        Class nodeInterface = ListAdapter.getNodeClass(node);
+                        Class nodeInterface = listAdapter.getNodeClass(node);
+                        
                         if (ExternalProduct.class.equals(nodeInterface)){
                             node = ((ExternalProduct)node).getDistributionKits();
                         }
-                            
+                        
                        List<Node> nodeList = ((Dir)node).getNodeList().getNodes();
-                        for (Node element : nodeList) {
-                            out.println("<tr>"
-                                    + "<td><a href='"+row+"?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
-                                    + "</tr>");
-                        }
+                       out.print(nodeList.toString());
+//                        for (Node element : nodeList) {
+//                            out.println("<tr>"
+//                                    + "<td><a href='"+row+"?id=" + element.getId() + "'>" + element.getName() + "</a></td>"
+//                                    + "</tr>");
+//                        }
 
                     %>
                 </table>

@@ -6,7 +6,7 @@ $(document).ready(function () {
             alert(cook); 
       }
     
-      alert(2);
+     
     $("#menu-submit").click(function () {
        $(".wrapper").toggleClass('active');
 
