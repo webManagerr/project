@@ -14,7 +14,8 @@ import org.radixware.web.manager.Layers;
  *
  * @author Денис
  */
-public class BranchLayersImplementation implements Layers{
+public class BranchLayersImplementation implements Layers {
+
     private BaseEntry branchEntry;
 
     public BranchLayersImplementation(BaseEntry branchEntry) {
@@ -23,7 +24,7 @@ public class BranchLayersImplementation implements Layers{
 
     @Override
     public Iterator<Layer> iterator() {
-       return null; //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null; //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

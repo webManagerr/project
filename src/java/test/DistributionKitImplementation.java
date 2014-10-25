@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.xmlbeans.XmlException;
 import org.radixware.web.manager.DistributionKit;
 import org.radixware.web.manager.DistributionKits;
@@ -35,30 +33,29 @@ public class DistributionKitImplementation extends NodeImplementation implements
         this.de = de;
     }
 
-    private void intitMembers()
-    {
-       synchronized(this){
+    private void intitMembers() {
+        synchronized (this) {
             version = de.getShortIdentifer();
             time = new Timestamp(getUpXml().getTime());
             description = getUpXml().getDescription();
             if (changeList == null) {
-                   changeList = new ArrayList<>();
-                   for (StructuredChanges ch : getUpXml().getStructuredChangesList()) {
-                       for (StructuredChange element : ch.getStructuredChangeList()) {
-                           changeList.add("[" + element.getIssueType() + "] ()" + element.getMessage());
-                       }
-                   }
-               }
+                changeList = new ArrayList<>();
+                for (StructuredChanges ch : getUpXml().getStructuredChangesList()) {
+                    for (StructuredChange element : ch.getStructuredChangeList()) {
+                        changeList.add("[" + element.getIssueType() + "] ()" + element.getMessage());
+                    }
+                }
+            }
             pervVersion = getUpXml().getPrevReleaseNumber();
-           try {
-               release = new ReleaseImplementation(de.getRelease(), this);
-               scripts = new ScriptsImplementation(de.getScripts(), this);
-           } catch (SVNException ex) {
-              throw new ProjectInfoAccessException(ex);
-           }
-       }
+            try {
+                release = new ReleaseImplementation(de.getRelease(), this);
+                scripts = new ScriptsImplementation(de.getScripts(), this);
+            } catch (SVNException ex) {
+                throw new ProjectInfoAccessException(ex);
+            }
+        }
     }
-    
+
     Upgrade getUpXml() throws ProjectInfoAccessException {
         try {
             UpgradeXmlEntry e = de.getUpgradeXml();
@@ -71,8 +68,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     public String getVersion() {
-        if(version == null)
-        {
+        if (version == null) {
             intitMembers();
         }
         return version;
@@ -80,8 +76,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     public Timestamp getCreateTime() {
-        if(version == null)
-        {
+        if (version == null) {
             intitMembers();
         }
         return time;
@@ -89,8 +84,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     public String getDescription() {
-        if(version == null)
-        {
+        if (version == null) {
             intitMembers();
         }
         return description;
@@ -98,8 +92,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     public List<String> getChangeList() {
-        if(version == null)
-        {
+        if (version == null) {
             intitMembers();
         }
         return changeList;
@@ -107,8 +100,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     public String getPrevVersion() {
-        if(version == null)
-        {
+        if (version == null) {
             intitMembers();
         }
         return this.pervVersion;
@@ -116,8 +108,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     public Release getRelease() {
-        if(version == null)
-        {
+        if (version == null) {
             intitMembers();
         }
         return release;
@@ -125,8 +116,7 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     public Scripts getScripts() {
-        if(version == null)
-        {
+        if (version == null) {
             intitMembers();
         }
         return scripts;
@@ -134,6 +124,6 @@ public class DistributionKitImplementation extends NodeImplementation implements
 
     @Override
     protected String idUrl() {
-       return de.getURL().getPath();
+        return de.getURL().getPath();
     }
 }

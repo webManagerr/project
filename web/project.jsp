@@ -37,11 +37,7 @@
             String id = request.getParameter("id");
             Project node = (Project) WorkspaceFactory.getInstance().findNodeById(id);
         %>
-        <%
-            Project project = node.getProjectParent();
-            String externalProductId = project.getExternalProducts().getId();
-        %>
-        
+
         <%@include file="menu.jsp" %>
 
 

@@ -31,7 +31,7 @@ public class DistributionKitsImplementation extends DirImplementation implements
                     productDistributivesEntry = ((ExternalProductImplementation) super.getParent())
                             .getProductDistributivesEntry();
                     distributionKit = new ArrayList<>();
-                    
+
                     for (DistributiveEntry element : productDistributivesEntry.getDistributives()) {
                         distributionKit.add(new DistributionKitImplementation(element, this));
                     }
