@@ -92,14 +92,4 @@ public class ProjectListImplementation extends DirImplementation<Project> implem
     protected String idUrl() {
         throw new ProjectInfoAccessException("getUrl not supported " + this.getClass().getName());
     }
-
-    @Override
-    protected String idUrlParent() {
-        throw new ProjectInfoAccessException("getUrlParent not supported " + this.getClass().getName());
-    }
-
-    @Override
-    public Project getProjectParent() {
-        return null;
-    }
 }

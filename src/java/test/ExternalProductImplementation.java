@@ -39,8 +39,4 @@ public class ExternalProductImplementation extends NodeImplementation implements
         return productDistributivesEntry.getURL().getPath();
     }
 
-    @Override
-    protected String idUrlParent() {
-        return productDistributivesEntry.getParent().getURL().getPath();
-    }
 }

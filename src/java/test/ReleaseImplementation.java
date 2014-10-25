@@ -8,7 +8,6 @@ import org.tmatesoft.svn.core.SVNException;
 
 public class ReleaseImplementation extends NodeImplementation implements Release
 {
-
         private DistributiveReleaseEntry distributiveReleaseEntry;
         private String version = null;
         private String prevReleaseVersion = "";
@@ -73,8 +72,4 @@ public class ReleaseImplementation extends NodeImplementation implements Release
         return distributiveReleaseEntry.getURL().getPath();
     }
 
-    @Override
-    protected String idUrlParent() {
-        return distributiveReleaseEntry.getParent().getURL().getPath();
-    }	
 }

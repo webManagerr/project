@@ -56,12 +56,4 @@ public class DistributionKitsImplementation extends DirImplementation implements
         }
         return productDistributivesEntry.getURL().getPath();
     }
-
-    @Override
-    protected String idUrlParent() {
-        if (distributionKit == null){
-            getNodeList();
-        }
-        return productDistributivesEntry.getParent().getURL().getPath();
-    }
 }

@@ -47,9 +47,4 @@ public class ScriptsImplementation extends NodeImplementation implements Scripts
     protected String idUrl() {
         return distributiveScriptsEntry.getURL().getPath();
     }
-
-    @Override
-    protected String idUrlParent() {
-        return distributiveScriptsEntry.getParent().getURL().getPath();
-    }
 }

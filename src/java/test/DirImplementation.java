@@ -24,6 +24,4 @@ public abstract class DirImplementation<T extends Node> extends NodeImplementati
     @Override
     protected abstract String idUrl();
 
-    @Override
-    protected abstract String idUrlParent();
 }

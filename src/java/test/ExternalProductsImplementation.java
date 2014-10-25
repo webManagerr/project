@@ -72,13 +72,4 @@ public class ExternalProductsImplementation extends DirImplementation<ExternalPr
         return distributivesEntry.getURL().getPath();
     }
 
-    @Override
-    protected String idUrlParent() {
-        if(externalProductList == null)
-        {
-            getNodeList();
-        }
-        return distributivesEntry.getParent().getURL().getPath();
-    }
-
 }

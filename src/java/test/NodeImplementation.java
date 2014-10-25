@@ -9,8 +9,6 @@ public abstract class NodeImplementation implements Node {
     private Node parent = null;
 
     protected abstract String idUrl();
-
-    protected abstract String idUrlParent();
     
     public  Project getProjectParent()
     {
@@ -34,7 +32,12 @@ public abstract class NodeImplementation implements Node {
 
     @Override
     public String getId() {
-        return idUrlParent() + "~" + idUrl();
+        Project project = getProjectParent();
+        if(project == null)
+        {
+            return "~" + idUrl();
+        }
+        return project.getId() + "~" + idUrl();
     }
 
     @Override

@@ -136,9 +136,4 @@ public class DistributionKitImplementation extends NodeImplementation implements
     protected String idUrl() {
        return de.getURL().getPath();
     }
-
-    @Override
-    protected String idUrlParent() {
-        return de.getParent().getURL().getPath();
-    }
 }
