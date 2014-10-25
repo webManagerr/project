@@ -36,7 +36,7 @@
             String id = request.getParameter("id");
             DistributionKit node = (DistributionKit) WorkspaceFactory.getInstance().findNodeById(id);
             Release release = node.getRelease();
-            ListAdapter listAdapter = new ListAdapter(WorkspaceFactory.getInstance().findNodeById(id));
+            
 
         %>
         <%@include file="menu.jsp" %>

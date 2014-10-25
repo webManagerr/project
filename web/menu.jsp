@@ -6,13 +6,10 @@
 <%@page import="web.Tools"%>
 <%@page import="java.util.List"%>
 <%
-    String externalProductId = "";
-    Class nodeInterface = ListAdapter.getNodeClass(node);
-    if (Project.class.equals(nodeInterface)) {
-        externalProductId = ((Project) node).getExternalProducts().getId();
-    } else {
-        externalProductId = "#";
-    }
+    
+    
+    Project project = node.getProjectParent();
+    String externalProductId = project.getExternalProducts().getId();
 %>
 <div class="list-nav">      
     <ul class="nav">

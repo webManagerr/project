@@ -52,7 +52,8 @@
                        
                         <th><%=coloms.get(0)%></th>
                     </tr>
-                    <%
+                    <%  
+                        Class nodeInterface = ListAdapter.getNodeClass(node);
                         if (ExternalProduct.class.equals(nodeInterface)){
                             node = ((ExternalProduct)node).getDistributionKits();
                         }
