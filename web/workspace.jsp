@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 25.09.2014, 13:11:37
-    Author     : Denis
---%>
-
 <%@page import="org.radixware.web.manager.Node"%>
 <%@page import="test.WorkspaceFactory"%>
 <%@page import="org.radixware.web.manager.Project"%>
@@ -43,7 +37,6 @@
                             out.println("<tr>"
                                     + "<td><a href='project.jsp?id=" + p.getId() + "'>" + p.getName() + "</a></td>"
                                     + "</tr>");
-
                         }
                     %>
                 </table>

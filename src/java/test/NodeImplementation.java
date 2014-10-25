@@ -15,7 +15,7 @@ public abstract class NodeImplementation implements Node {
         Node temp = parent;
         while(!temp.getClass().equals(ProjectImplementation.class))
         {
-            temp = parent.getParent();
+            temp = temp.getParent();
         }
         return (Project)temp;
     }
