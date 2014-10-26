@@ -1,3 +1,4 @@
+<%@page errorPage="error-page.jsp"%>
 <%@page import="org.radixware.web.manager.Node"%>
 <%@page import="test.WorkspaceFactory"%>
 <%@page import="org.radixware.web.manager.Project"%>
@@ -41,7 +42,7 @@
                     %>
                 </table>
 
-                <br/>
+                
 
             </div>
         </div>

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : distrib
-    Created on : 27.09.2014, 18:36:00
-    Author     : Denis
---%>
+<%@page errorPage="error-page.jsp"%>
 
 <%@page import="org.radixware.web.manager.Layer"%>
 <%@page import="org.radixware.web.manager.Layers"%>
@@ -68,7 +64,7 @@
                     <%
                         for (String change : node.getChangeList()) {
                     %>
-                    <p><%=change%></p>
+                    <p class="text-list"><%=change%></p>
                     <%
                         }
                     %> 

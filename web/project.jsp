@@ -1,8 +1,4 @@
-<%-- 
-    Document   : page
-    Created on : 25.09.2014, 14:30:26
-    Author     : Denis
---%>
+<%@page errorPage="error-page.jsp"%>
 
 <%@page import="web.ListAdapter"%>
 <%@page import="java.util.List"%>

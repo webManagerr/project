@@ -1,3 +1,4 @@
+
 <%@page import="org.radixware.web.manager.Project"%>
 <%@page import="web.Tools"%>
 <%@page import="java.util.List"%>
@@ -33,7 +34,6 @@
             <div class="menu-list-arrow-border"></div>
             <div class="menu-list-arrow"></div>
             <ul>
-                <ul>
                     <%
                         for (int i = 2; i < ref.size(); i++) {
                             out.println("<li>" + ref.get(i) + "</li>");
