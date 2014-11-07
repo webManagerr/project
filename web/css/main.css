@@ -171,3 +171,30 @@ border-bottom: 1px solid #A9A9A9;
     margin:0;
     text-indent:10px;
 }
+
+ul#tabs{
+    font-weight: bold;
+    list-style-type: none;
+    border-bottom: 1px solid #bdc4c9;
+    margin-bottom: 12px;
+}
+
+#tabs li.tab{
+    float:left;
+    height: 25px;
+    margin: 5px 0px 0 2px;
+    border-bottom: 1px solid #bdc4c9;
+}
+
+#tabs li.tab a{
+    float:center;
+    display: block;
+    text-decoration: none;
+}
+#tabs li.tab a:hover{
+    border-bottom: none;
+}
+
+#tabs li.selected-tab{
+    border-bottom: 1px solid white;
+}

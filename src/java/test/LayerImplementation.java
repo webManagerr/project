@@ -24,6 +24,7 @@ public class LayerImplementation  implements Layer{
 
     public LayerImplementation(LayerEntry layerEntry) {
         this.layerEntry = layerEntry;
+        //layerEntry.getTooltip()
     }
 
     @Override
